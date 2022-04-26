@@ -7,6 +7,7 @@ class VideoCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(bottom: 15.h),
       child: Column(
         children: [
           AspectRatio(
