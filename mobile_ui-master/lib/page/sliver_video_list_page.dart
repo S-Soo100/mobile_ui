@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_ui/constants.dart';
+import 'package:mobile_ui/dummy_repository/video_repository.dart';
+import 'package:mobile_ui/model/video_model.dart';
 import 'package:mobile_ui/widget/video_card_widget.dart';
 
 class SliverVideoListPage extends StatelessWidget {
-  const SliverVideoListPage({Key? key}) : super(key: key);
+  SliverVideoListPage({Key? key}) : super(key: key);
+
+  List<VideoModel> videoList = videorepository;
 
   @override
   Widget build(BuildContext context) {
@@ -89,28 +93,7 @@ class SliverVideoListPage extends StatelessWidget {
                       itemCount: 10,
                       itemBuilder: (BuildContext context, int index) {
                         return VideoCardWidget(
-                          thumbnail: 'assets/00200${index + 1}.png',
-                          title: '동영상 타이틀을 입력하세요',
-                          coach: '강사 이름',
-                          difficulty: 1,
-                          time: '50:00',
-                          category: 0,
-                        );
-                      }),
-                ),
-                Container(
-                  color: MainBackgroundColor,
-                  child: ListView.builder(
-                      padding: const EdgeInsets.all(14),
-                      itemCount: 10,
-                      itemBuilder: (BuildContext context, int index) {
-                        return const VideoCardWidget(
-                          thumbnail: 'assets/002001.png',
-                          title: '동영상 타이틀을 입력하세요',
-                          coach: '강사 이름',
-                          difficulty: 1,
-                          time: '50:00',
-                          category: 0,
+                          videoModel: videoList.elementAt(index),
                         );
                       }),
                 ),
@@ -121,12 +104,7 @@ class SliverVideoListPage extends StatelessWidget {
                       itemCount: 10,
                       itemBuilder: (BuildContext context, int index) {
                         return VideoCardWidget(
-                          thumbnail: 'assets/002001.png',
-                          title: '동영상 타이틀을 입력하세요',
-                          coach: '강사 이름',
-                          difficulty: 1,
-                          time: '50:00',
-                          category: 0,
+                          videoModel: videoList.elementAt(index),
                         );
                       }),
                 ),
@@ -137,12 +115,18 @@ class SliverVideoListPage extends StatelessWidget {
                       itemCount: 10,
                       itemBuilder: (BuildContext context, int index) {
                         return VideoCardWidget(
-                          thumbnail: 'assets/002001.png',
-                          title: '동영상 타이틀을 입력하세요',
-                          coach: '강사 이름',
-                          difficulty: 1,
-                          time: '50:00',
-                          category: 0,
+                          videoModel: videoList.elementAt(index),
+                        );
+                      }),
+                ),
+                Container(
+                  color: MainBackgroundColor,
+                  child: ListView.builder(
+                      padding: const EdgeInsets.all(14),
+                      itemCount: 10,
+                      itemBuilder: (BuildContext context, int index) {
+                        return VideoCardWidget(
+                          videoModel: videoList.elementAt(index),
                         );
                       }),
                 ),

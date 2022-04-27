@@ -46,7 +46,7 @@ class _MainHomeState extends State<MainHome> {
           ),
         ],
       ),
-      body: const SliverVideoListPage(),
+      body: SliverVideoListPage(),
       backgroundColor: MainBackgroundColor,
       // backgroundColor: const Color.fromRGBO(42, 42, 42, 1),
       bottomNavigationBar: Container(

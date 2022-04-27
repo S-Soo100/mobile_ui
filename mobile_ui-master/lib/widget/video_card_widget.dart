@@ -1,24 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mobile_ui/constants.dart';
+import 'package:mobile_ui/model/category_model.dart';
+import 'package:mobile_ui/model/video_model.dart';
 import 'package:mobile_ui/page/video_detail_popup.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class VideoCardWidget extends StatelessWidget {
-  const VideoCardWidget(
-      {Key? key,
-      required this.thumbnail,
-      required this.title,
-      required this.coach,
-      required this.difficulty,
-      required this.category,
-      required this.time})
-      : super(key: key);
+  const VideoCardWidget({
+    Key? key,
+    required this.videoModel,
+  }) : super(key: key);
 
-  final String thumbnail;
-  final String title;
-  final String coach;
-  final int difficulty;
-  final int category;
-  final String time;
+  final VideoModel videoModel;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +28,7 @@ class VideoCardWidget extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       builder: (context) => VideoDetailPopup(
-                            thumbnail: thumbnail,
+                            videoModel: videoModel,
                           )),
                 );
               },
@@ -43,7 +37,9 @@ class VideoCardWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                     // color: Colors.blueGrey,
                     borderRadius: BorderRadius.circular(10.w),
-                    image: DecorationImage(image: AssetImage(thumbnail))),
+                    // image: DecorationImage(image: AssetImage(thumbnail))),
+                    image: DecorationImage(
+                        image: AssetImage(videoModel.thumnailUrl))),
                 child: Stack(
                   alignment: Alignment.bottomRight,
                   children: [
@@ -60,7 +56,7 @@ class VideoCardWidget extends StatelessWidget {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10.h))),
                           child: Text(
-                            '$time',
+                            '${videoModel.time}',
                             style:
                                 TextStyle(color: Colors.white, fontSize: 18.sp),
                           ),
@@ -77,14 +73,14 @@ class VideoCardWidget extends StatelessWidget {
             child: Row(
               children: [
                 Text(
-                  title,
+                  videoModel.name,
                   style: TextStyle(
                     fontSize: 22.sp,
                     color: Colors.white,
                   ),
                 ),
                 Text(
-                  coach,
+                  videoModel.instructor,
                   style: TextStyle(
                     fontSize: 22.sp,
                     color: Colors.white,
@@ -98,37 +94,9 @@ class VideoCardWidget extends StatelessWidget {
             height: 35.h,
             child: Row(
               children: [
-                Row(
-                  children: [
-                    Icon(
-                      Icons.star,
-                      color: Colors.orangeAccent,
-                      size: 18.w,
-                    ),
-                    Icon(
-                      Icons.star,
-                      color: Colors.orangeAccent,
-                      size: 18.w,
-                    ),
-                    Icon(
-                      Icons.star,
-                      color: Colors.orangeAccent,
-                      size: 18.w,
-                    ),
-                    Icon(
-                      Icons.star,
-                      color: Colors.orangeAccent,
-                      size: 18.w,
-                    ),
-                    Icon(
-                      Icons.star,
-                      color: Colors.orangeAccent,
-                      size: 18.w,
-                    )
-                  ],
-                ),
+                _getDifficulty(videoModel.difficulty),
                 Text(
-                  '휠라테스',
+                  showCategory(videoModel.category),
                   style: TextStyle(
                     fontSize: 22.sp,
                     color: Colors.white,
@@ -141,5 +109,45 @@ class VideoCardWidget extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String showCategory(CategoryModel category) {
+    if (category.id == 1) {
+      return '휠체어 스피닝';
+    }
+    return '휠라테스';
+  }
+
+  Widget _getDifficulty(int difficulty) {
+    List<Widget> starList = [];
+    int num = 5 - difficulty;
+    for (var i = 0; i < difficulty; i++) {
+      starList.add(_returnDifficulty(true));
+    }
+    for (var i = 0; i < num; i++) {
+      starList.add(_returnDifficulty(false));
+    }
+
+    return Row(
+      children: starList,
+    );
+  }
+
+  Widget _returnDifficulty(bool check) {
+    if (check == true) {
+      return SvgPicture.asset(
+        'assets/difficulty_large_selected.svg',
+        color: MainBluetoothSettingTextColor,
+        width: 18.w,
+        height: 18.w,
+      );
+    } else {
+      return SvgPicture.asset(
+        'assets/difficulty_large.svg',
+        color: MainBluetoothBoxBorderColor,
+        width: 18.w,
+        height: 18.w,
+      );
+    }
   }
 }

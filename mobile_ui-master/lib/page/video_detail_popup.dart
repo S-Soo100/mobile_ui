@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile_ui/constants.dart';
+import 'package:mobile_ui/model/category_model.dart';
+import 'package:mobile_ui/model/video_model.dart';
+import 'package:mobile_ui/widget/video_info_box_widget.dart';
+import 'package:mobile_ui/widget/video_tag_box_widget.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class VideoDetailPopup extends StatelessWidget {
-  const VideoDetailPopup({Key? key, required this.thumbnail}) : super(key: key);
+  const VideoDetailPopup({Key? key, required this.videoModel})
+      : super(key: key);
 
-  final String thumbnail;
+  final VideoModel videoModel;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-          child: Container(
+      backgroundColor: MainBackgroundColor,
+      body: Container(
         height: 1.sh,
         width: 1.sw,
         child: Stack(alignment: Alignment.bottomLeft,
@@ -20,10 +26,11 @@ class VideoDetailPopup extends StatelessWidget {
               Align(
                 alignment: Alignment.topCenter,
                 child: Container(
-                  height: 424.h,
+                  height: 0.5.sh,
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage(thumbnail), fit: BoxFit.fitHeight)),
+                          image: AssetImage(videoModel.thumnailUrl),
+                          fit: BoxFit.fitHeight)),
                 ),
               ),
               Container(
@@ -58,91 +65,35 @@ class VideoDetailPopup extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('휠라로빅',
-                            style: TextStyle(
-                                fontSize: 18.sp,
-                                color: Color.fromRGBO(180, 180, 180, 1),
-                                fontWeight: FontWeight.w500)),
-                        Text('50:00',
-                            style: TextStyle(
-                                fontSize: 18.sp,
-                                color: Color.fromRGBO(180, 180, 180, 1),
-                                fontWeight: FontWeight.w500)),
-                      ],
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      child: Text(_showCategory(videoModel.category),
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                              fontSize: 18.sp,
+                              color: Color.fromRGBO(180, 180, 180, 1),
+                              fontWeight: FontWeight.w500)),
                     ),
-                    SizedBox(
-                      height: 14.h,
-                    ),
+                    SizedBox(height: 14.h),
                     Container(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        '타이틀을 입력하여 주세요',
+                        videoModel.name,
                         style: TextStyle(
                             fontSize: 28.sp,
                             color: Colors.white,
                             fontWeight: FontWeight.bold),
                       ),
                     ),
-                    SizedBox(
-                      height: 22.h,
-                    ),
+                    SizedBox(height: 10.h),
                     Expanded(
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            SizedBox(
-                              height: 22.h,
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(bottom: 20.h),
-                              width: 400.w,
-                              height: 55.h,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12.h),
-                                color: MainInfoBoxColor,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.2),
-                                    blurRadius: 5.0,
-                                    spreadRadius: 1.0,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(bottom: 20.h),
-                              width: 400.w,
-                              height: 55.h,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12.h),
-                                color: MainInfoBoxColor,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.2),
-                                    blurRadius: 5.0,
-                                    spreadRadius: 1.0,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              width: 400.w,
-                              height: 200.h,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12.h),
-                                color: MainInfoBoxColor,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.2),
-                                    blurRadius: 5.0,
-                                    spreadRadius: 1.0,
-                                  ),
-                                ],
-                              ),
-                            ),
+                            SizedBox(height: 10.h),
+                            _videoDetailInfos(),
+                            _videoTags(),
+                            _instructorAndDescription(),
                           ],
                         ),
                       ),
@@ -150,63 +101,164 @@ class VideoDetailPopup extends StatelessWidget {
                   ],
                 ),
               ),
-              Align(
-                alignment: Alignment.topLeft,
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Container(
-                    margin:
-                        EdgeInsets.symmetric(vertical: 38.h, horizontal: 14.w),
-                    width: 32.h,
-                    height: 32.h,
-                    decoration: BoxDecoration(
-                        color: MainBackgroundColor, shape: BoxShape.circle),
-                    child: Icon(
-                      Icons.arrow_back,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
+              _goBackButtonWidet(context),
             ]),
-      )),
-      bottomNavigationBar: Container(
-        padding: EdgeInsets.fromLTRB(20.w, 24.h, 20.w, 8.h),
-        // height: 127.h,
-        decoration: BoxDecoration(
-          color: MainBackgroundColor,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.2),
-              blurRadius: 5.0,
-              spreadRadius: 2.0,
-            ),
-          ],
-        ),
-        child: GestureDetector(
-          onDoubleTap: () {
-            print('play');
-          },
-          child: Container(
-            width: 380.w,
-            height: 55.h,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(55.h),
-              color: MainLogoColor,
-            ),
-            alignment: AlignmentDirectional.center,
-            child: Text(
-              '운동 시작',
-              style: TextStyle(
-                  fontSize: 18.sp,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
-            ),
+      ),
+      bottomNavigationBar: _startVideoButtonWidget(),
+    );
+  }
+
+  Container _instructorAndDescription() {
+    return Container(
+      padding: EdgeInsets.only(left: 14.w, top: 14.h, right: 14.w),
+      width: 400.w,
+      height: 200.h,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12.h),
+        color: MainInfoBoxColor,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            blurRadius: 5.0,
+            spreadRadius: 1.0,
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                margin: EdgeInsets.only(right: 14.w),
+                decoration:
+                    BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+                width: 40.w,
+                height: 40.h,
+              ),
+              Text(
+                videoModel.instructor,
+                style: TextStyle(fontSize: 18.sp, color: Colors.white),
+              )
+            ],
+          ),
+          SizedBox(
+            height: 14.h,
+          ),
+          Text(
+            videoModel.description,
+            style: TextStyle(fontSize: 18.sp, color: Colors.white),
+          )
+        ],
+      ),
+    );
+  }
+
+  Align _goBackButtonWidet(BuildContext context) {
+    return Align(
+      alignment: Alignment.topLeft,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.pop(context);
+        },
+        child: Container(
+          margin: EdgeInsets.symmetric(vertical: 76.h, horizontal: 14.w),
+          width: 32.h,
+          height: 32.h,
+          decoration:
+              BoxDecoration(color: MainBackgroundColor, shape: BoxShape.circle),
+          child: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
           ),
         ),
       ),
     );
+  }
+
+  Container _startVideoButtonWidget() {
+    return Container(
+      padding: EdgeInsets.fromLTRB(20.w, 24.h, 20.w, 8.h),
+      // height: 127.h,
+      decoration: BoxDecoration(
+        color: MainBackgroundColor,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            blurRadius: 5.0,
+            spreadRadius: 2.0,
+          ),
+        ],
+      ),
+      child: GestureDetector(
+        onTap: () => print('play video'),
+        child: Container(
+          width: 380.w,
+          height: 55.h,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(55.h),
+            color: MainLogoColor,
+          ),
+          alignment: AlignmentDirectional.center,
+          child: Text(
+            '운동 시작',
+            style: TextStyle(
+                fontSize: 18.sp,
+                color: Colors.white,
+                fontWeight: FontWeight.bold),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _videoDetailInfos() {
+    return Container(
+      margin: EdgeInsets.only(bottom: 20.h),
+      width: 400.w,
+      height: 55.h,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12.h),
+        color: MainInfoBoxColor,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            blurRadius: 5.0,
+            spreadRadius: 1.0,
+          ),
+        ],
+      ),
+      child: VideoInfoBoxWidget(
+        videoModel: videoModel,
+      ),
+    );
+  }
+
+  Widget _videoTags() {
+    return Container(
+        margin: EdgeInsets.only(bottom: 20.h),
+        padding: EdgeInsets.symmetric(horizontal: 14.w),
+        width: 400.w,
+        height: 69.h,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12.h),
+          color: MainInfoBoxColor,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 5.0,
+              spreadRadius: 1.0,
+            ),
+          ],
+        ),
+        child: VideoTagBoxWidget(videoModel: videoModel));
+  }
+
+  String _showCategory(CategoryModel category) {
+    if (category.id == 1) {
+      return '휠체어 스피닝';
+    }
+    return '카테고리';
   }
 }
