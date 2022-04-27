@@ -53,17 +53,13 @@ class SliverVideoListPage extends StatelessWidget {
                   pinned: true,
                   backgroundColor: MainBackgroundColor,
                   title: TabBar(indicatorColor: MainLogoColor, tabs: [
-                    InkWell(
-                      child: Text(
-                        '전체',
-                        style: TextStyle(fontSize: 15),
-                      ),
+                    Text(
+                      '전체',
+                      style: TextStyle(fontSize: 15),
                     ),
-                    InkWell(
-                      child: Text(
-                        '휠체어 스피닝',
-                        style: TextStyle(fontSize: 15),
-                      ),
+                    Text(
+                      '휠체어 스피닝',
+                      style: TextStyle(fontSize: 15),
                     ),
                     InkWell(
                       child: Text(
@@ -92,7 +88,14 @@ class SliverVideoListPage extends StatelessWidget {
                           EdgeInsets.symmetric(horizontal: 14.w, vertical: 0.h),
                       itemCount: 10,
                       itemBuilder: (BuildContext context, int index) {
-                        return const VideoCardWidget();
+                        return VideoCardWidget(
+                          thumbnail: 'assets/00200${index + 1}.png',
+                          title: '동영상 타이틀을 입력하세요',
+                          coach: '강사 이름',
+                          difficulty: 1,
+                          time: '50:00',
+                          category: 0,
+                        );
                       }),
                 ),
                 Container(
@@ -101,7 +104,14 @@ class SliverVideoListPage extends StatelessWidget {
                       padding: const EdgeInsets.all(14),
                       itemCount: 10,
                       itemBuilder: (BuildContext context, int index) {
-                        return VideoCardWidget();
+                        return const VideoCardWidget(
+                          thumbnail: 'assets/002001.png',
+                          title: '동영상 타이틀을 입력하세요',
+                          coach: '강사 이름',
+                          difficulty: 1,
+                          time: '50:00',
+                          category: 0,
+                        );
                       }),
                 ),
                 Container(
@@ -110,7 +120,14 @@ class SliverVideoListPage extends StatelessWidget {
                       padding: const EdgeInsets.all(14),
                       itemCount: 10,
                       itemBuilder: (BuildContext context, int index) {
-                        return VideoCardWidget();
+                        return VideoCardWidget(
+                          thumbnail: 'assets/002001.png',
+                          title: '동영상 타이틀을 입력하세요',
+                          coach: '강사 이름',
+                          difficulty: 1,
+                          time: '50:00',
+                          category: 0,
+                        );
                       }),
                 ),
                 Container(
@@ -119,7 +136,14 @@ class SliverVideoListPage extends StatelessWidget {
                       padding: const EdgeInsets.all(14),
                       itemCount: 10,
                       itemBuilder: (BuildContext context, int index) {
-                        return InkWell(child: VideoCardWidget());
+                        return VideoCardWidget(
+                          thumbnail: 'assets/002001.png',
+                          title: '동영상 타이틀을 입력하세요',
+                          coach: '강사 이름',
+                          difficulty: 1,
+                          time: '50:00',
+                          category: 0,
+                        );
                       }),
                 ),
               ],

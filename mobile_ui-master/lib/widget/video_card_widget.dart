@@ -1,8 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mobile_ui/page/video_detail_popup.dart';
 
 class VideoCardWidget extends StatelessWidget {
-  const VideoCardWidget({Key? key}) : super(key: key);
+  const VideoCardWidget(
+      {Key? key,
+      required this.thumbnail,
+      required this.title,
+      required this.coach,
+      required this.difficulty,
+      required this.category,
+      required this.time})
+      : super(key: key);
+
+  final String thumbnail;
+  final String title;
+  final String coach;
+  final int difficulty;
+  final int category;
+  final String time;
 
   @override
   Widget build(BuildContext context) {
@@ -12,35 +28,47 @@ class VideoCardWidget extends StatelessWidget {
         children: [
           AspectRatio(
             aspectRatio: 16.0 / 9.0,
-            child: Container(
-              height: 230.h,
-              decoration: BoxDecoration(
-                  color: Colors.blueGrey,
-                  borderRadius: BorderRadius.circular(10.w)),
-              child: Stack(
-                alignment: Alignment.bottomRight,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 12.h, right: 12.w),
-                    child: Opacity(
-                      opacity: 0.5,
-                      child: Container(
-                        alignment: AlignmentDirectional.center,
-                        width: 80.w,
-                        height: 24.h,
-                        decoration: BoxDecoration(
-                            color: Colors.black,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.h))),
-                        child: Text(
-                          '00:00',
-                          style:
-                              TextStyle(color: Colors.white, fontSize: 18.sp),
+            child: GestureDetector(
+              onDoubleTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => VideoDetailPopup(
+                            thumbnail: thumbnail,
+                          )),
+                );
+              },
+              child: Container(
+                height: 230.h,
+                decoration: BoxDecoration(
+                    // color: Colors.blueGrey,
+                    borderRadius: BorderRadius.circular(10.w),
+                    image: DecorationImage(image: AssetImage(thumbnail))),
+                child: Stack(
+                  alignment: Alignment.bottomRight,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 12.h, right: 12.w),
+                      child: Opacity(
+                        opacity: 0.5,
+                        child: Container(
+                          alignment: AlignmentDirectional.center,
+                          width: 80.w,
+                          height: 24.h,
+                          decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10.h))),
+                          child: Text(
+                            '$time',
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 18.sp),
+                          ),
                         ),
                       ),
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
             ),
           ),
@@ -49,14 +77,14 @@ class VideoCardWidget extends StatelessWidget {
             child: Row(
               children: [
                 Text(
-                  '상큼하게 등 조지는 법',
+                  title,
                   style: TextStyle(
                     fontSize: 22.sp,
                     color: Colors.white,
                   ),
                 ),
                 Text(
-                  '베카',
+                  coach,
                   style: TextStyle(
                     fontSize: 22.sp,
                     color: Colors.white,
