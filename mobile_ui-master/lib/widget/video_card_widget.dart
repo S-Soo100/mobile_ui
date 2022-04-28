@@ -23,7 +23,7 @@ class VideoCardWidget extends StatelessWidget {
           AspectRatio(
             aspectRatio: 16.0 / 9.0,
             child: GestureDetector(
-              onDoubleTap: () {
+              onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -136,14 +136,14 @@ class VideoCardWidget extends StatelessWidget {
   Widget _returnDifficulty(bool check) {
     if (check == true) {
       return SvgPicture.asset(
-        'assets/difficulty_large_selected.svg',
+        'assets/images/difficulty_large_selected.svg',
         color: MainBluetoothSettingTextColor,
         width: 18.w,
         height: 18.w,
       );
     } else {
       return SvgPicture.asset(
-        'assets/difficulty_large.svg',
+        'assets/images/difficulty_large.svg',
         color: MainBluetoothBoxBorderColor,
         width: 18.w,
         height: 18.w,

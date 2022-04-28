@@ -20,7 +20,7 @@ class VideoInfoBoxWidget extends StatelessWidget {
           child: Row(
             children: [
               SvgPicture.asset(
-                'assets/calories.svg',
+                'assets/images/calories.svg',
                 color: Colors.white,
                 width: 20.w,
                 height: 20.w,
@@ -39,7 +39,7 @@ class VideoInfoBoxWidget extends StatelessWidget {
           child: Row(
             children: [
               SvgPicture.asset(
-                'assets/part.svg',
+                'assets/images/part.svg',
                 color: Colors.white,
                 width: 20.w,
                 height: 20.w,
@@ -58,7 +58,7 @@ class VideoInfoBoxWidget extends StatelessWidget {
           child: Row(
             children: [
               SvgPicture.asset(
-                'assets/scale_big_round.svg',
+                'assets/images/scale_big_round.svg',
                 color: Colors.white,
                 width: 20.w,
                 height: 20.w,
@@ -78,7 +78,7 @@ class VideoInfoBoxWidget extends StatelessWidget {
           child: Row(
             children: [
               SvgPicture.asset(
-                'assets/time.svg',
+                'assets/images/time.svg',
                 color: Colors.white,
                 width: 20.w,
                 height: 20.w,

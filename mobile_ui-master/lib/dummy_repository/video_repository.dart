@@ -11,18 +11,18 @@ List<String> videoNameList =
     List<String>.generate(10, (index) => 'Fitness Video Title #$index');
 
 List<String> thumbnailList =
-    List<String>.generate(10, (index) => 'assets/00200${index + 1}.png');
+    List<String>.generate(10, (index) => 'assets/images/00200${index + 1}.png');
 
 List<int> dummydifficultyList = [1, 3, 5, 2, 1, 3, 4, 4, 2, 1];
 
 List<Map<String, String>> dummyTagIconList = [
-  {'tagName': '전력질주', 'image': 'assets/icon_1.svg'},
-  {'tagName': '경수추천', 'image': 'assets/icon_2.svg'},
-  {'tagName': '근육이완', 'image': 'assets/icon_3.svg'},
-  {'tagName': '태그이름', 'image': 'assets/icon_1.svg'},
-  {'tagName': '태그이름', 'image': 'assets/icon_5.svg'},
-  {'tagName': '태그이름', 'image': 'assets/icon_6.svg'},
-  {'tagName': '양팔들기', 'image': 'assets/icon_7.svg'},
+  {'tagName': '전력질주', 'image': 'assets/images/icon_1.svg'},
+  {'tagName': '경수추천', 'image': 'assets/images/icon_2.svg'},
+  {'tagName': '근육이완', 'image': 'assets/images/icon_3.svg'},
+  {'tagName': '태그이름', 'image': 'assets/images/icon_1.svg'},
+  {'tagName': '태그이름', 'image': 'assets/images/icon_5.svg'},
+  {'tagName': '태그이름', 'image': 'assets/images/icon_6.svg'},
+  {'tagName': '양팔들기', 'image': 'assets/images/icon_7.svg'},
 ];
 
 List<VideoModel> videorepository = List<VideoModel>.generate(

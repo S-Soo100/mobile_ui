@@ -42,3 +42,6 @@ const Color SpeedOMeterDataUnitColor = Color(0xffdddddd);
 const Color SpeedOMeterPauseBoxColor = Color(0xff646464);
 const Color SpeedOMeterStopBoxColor = Color(0xff444444);
 const Color SingleIntervalResultCardHeader = Color(0xff848484);
+const Color NewButtonColor = Color(0xff484848);
+const Color BackWardButtonColor = Color(0xffcbcbcb);
+const Color NewDialogBackgroundColor = Color(0xff2f2f2f);
