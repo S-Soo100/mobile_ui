@@ -16,9 +16,9 @@ class GoToProfileSettingWidget extends StatelessWidget {
         );
       },
       child: Container(
-        alignment: Alignment.centerLeft,
-        width: 103.w,
-        child: Row(children: [
+        alignment: Alignment.centerRight,
+        // width: 103.w,
+        child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
           Container(
               height: 44.h,
               alignment: AlignmentDirectional.centerEnd,

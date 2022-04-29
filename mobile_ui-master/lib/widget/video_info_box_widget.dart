@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_ui/model/video_model.dart';
-import 'package:mobile_ui/widget/tag_icon_widget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

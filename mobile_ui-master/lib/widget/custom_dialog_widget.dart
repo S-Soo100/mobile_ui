@@ -17,6 +17,7 @@ Future<void> customDialog(
               borderRadius: BorderRadius.circular(15.h),
             ),
             elevation: 0,
+            insetPadding: const EdgeInsets.all(0),
             backgroundColor: NewDialogBackgroundColor,
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 50.w, vertical: 34.h),
